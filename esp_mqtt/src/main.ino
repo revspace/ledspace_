@@ -103,7 +103,8 @@ void onMqttMessage(char* topic, byte * payload, unsigned int length) {
     // Some topics (buttons for example) don't need a specific payload handled, just a reaction to the topic. Saves a lot of time!
 
     if (strcmp(topic, "revspace/lights/ledbar") == 0) {
-        Serial.println("Changing pattern based on mqtt: " + bericht)
+        Serial.print("Changing pattern based on mqtt: ");
+        Serial.println(bericht);
         gCurrentPatternNumber = atoi(bericht) % ARRAY_SIZE( gPatterns);
     }
 
