@@ -103,6 +103,7 @@ void onMqttMessage(char* topic, byte * payload, unsigned int length) {
     // Some topics (buttons for example) don't need a specific payload handled, just a reaction to the topic. Saves a lot of time!
 
     if (strcmp(topic, "revspace/lights/ledbar") == 0) {
+        Serial.println("Changing pattern based on mqtt: " + bericht)
         gCurrentPatternNumber = atoi(bericht) % ARRAY_SIZE( gPatterns);
     }
 
@@ -147,9 +148,8 @@ void onMqttMessage(char* topic, byte * payload, unsigned int length) {
 
     // NOMZ because we are hungry! Lets join the blinking lights parade!
     if (strcmp(topic, "revspace/button/nomz") == 0) {
+        Serial.println("NOMZ!");
         for (uint8_t tel = 0; tel < 150; tel++) {
-            Serial.println("NOMZ!");
-
             for (uint8_t vuller = 0; vuller < NUM_LEDS; vuller++) {
                 leds[vuller] = CRGB::Orange;
             }
@@ -167,9 +167,8 @@ void onMqttMessage(char* topic, byte * payload, unsigned int length) {
 
     // DOORBELL
     if (strcmp(topic, "revspace/button/doorbell") == 0) {
+        Serial.println("Doorbell!");
         for (uint8_t tel = 0; tel < 10; tel++) {
-            Serial.println("Doorbell!");
-
             for (uint8_t vuller = 0; vuller < NUM_LEDS; vuller++) {
                 leds[vuller] = CRGB::Yellow;
             }
